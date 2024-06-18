@@ -2,15 +2,23 @@
 <html>
 
   <head>
-      <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
-      
+      <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+
+        <!--Script needed to create the navmesh in the inspector-->  
+
+        <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+
+         <script src="https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js"></script>
   </head>
   <body>
 
        
       <button id="homeButton" style="top: 5px; right: 5px; position: fixed; display: block; background-color: blue; z-index: 9999;"> BACK TO HOME </button>
 
-      <a-scene>
+        <a-scene physics="gravity: -9.8;restitution: 0.1" inspector-plugin-recast>
+
 
           <a-assets>
               <img id="fourThreeThree" src="/assets/inworldImages/positionsRoom/FourThreeThree.png"/>
@@ -39,11 +47,19 @@
                 <img id="wcLogo" src="/assets/inworldImages/worldCupRoom/fifa world cup.jpg"/>
                 <img id="brazilWC" src="/assets/inworldImages/worldCupRoom/brazilWC.jpg"/>
                <img id="wcTrophy" src="/assets/inworldImages/worldCupRoom/wcTrophy.jpeg"/>
+
+              <img id="footballBall" src="/assets/images/footballBall.jpg"/>
             </a-assets>
           
-          <a-entity camera look-controls wasd-controls="acceleration: 500" position="0 1.6 0"></a-entity>
-       <a-sky color="lightblue"></a-sky>   
+          <a-entity id="rig" position="0 0 0" movement-controls="constrainToNavMesh: true; speed:0.5;" rotation="0 90 0">
+            <a-entity camera id="camera" position="0 1.6 0" look-controls acceleration="500" 
+              extended-wasd-controls>
+            </a-entity>
+          </a-entity>
 
+
+<a-gltf-model src="/assets/navmesh (3).gltf" visible="false" nav-mesh position="0 -0.1 0" ></a-gltf-model>
+            
         <a-entity id="grassFloor">
        <a-plane rotation="-90 0 0"
               height="25" width="25"
@@ -108,6 +124,11 @@
                position="0 0 5"
                color="darkblue"
                ></a-box> 
+           <a-text text="anchor: center; value: LEFT FOR\n WORLD CUP ROOM\n<-----------; color: white; align: center" scale="1.45 1.64 2" position="-9.22824 -7.54257 2.62671" rotation="0 90 90"></a-text>
+           <a-text text="anchor: center; value: WELCOME TO THE FOOTBALL MUSEUM\nHere you can find out some key facts about football. This is designed for both those who understand the game and those who are new.\n\n\n BY JAYDEN PRESSLEY; color: white; align: center" scale="2.07 1.64 2" position="-9.24853 -0.44102 2.62671" rotation="0 90 90"></a-text>
+           <a-text text="anchor: center; value: RIGHT FOR\n POSITIONS ROOM\n----------->; color: white; align: center" scale="1.45 1.64 2" position="-9.24853 6.84302 2.62671" rotation="0 90 90"></a-text>
+
+           <a-image src="#footballBall" position="9.37906 -0.41622 2.3075" rotation="180 90 90" scale="6.81 3.49 1"></a-image>
        </a-entity>
 
           <a-entity id="formationsRoom" rotation="-90 0 0" position="0 0 -25">
@@ -199,7 +220,7 @@
               <a-text text="value: Johan Cruyff; color: white" scale="2.5 2.5 2" position="-9.24853 -8.55568 3.78248" rotation="0 90 90"></a-text>
               <a-text text="value: Marco van Basten; color: white" scale="2.5 2.5 2" position="-9.24853 -3.0768 3.74797" rotation="0 90 90"></a-text>
               <a-text text="value: Michel Platini; color: white" scale="2.5 2.5 2" position="-9.24853 3.92283 3.65558" rotation="0 90 90"></a-text>
-              <a-text text="value: BASED ON BALON D'ORS (ALL ON 3); color: white" scale="1 1 2" position="-9.32124 -2.46538 0.15986" rotation="0 90 90"></a-text>
+             <a-text text="anchor: center; value: BASED ON BALON D'ORS (ALL ON 3), a balon d'or is like player of the year; color: #ff0000; align: center" scale="1 1.03 2" position="-9.32124 -0.70997 0.36368" rotation="0 90 90"></a-text>
 
               <a-text text="value: CHAMPIONS LEAGUE\nROOM; color: white; align: center" scale="2.93 3.89 5" position="0.11589 -9.87682 3.60767" rotation="-90 90 90" text="anchor:  align;  width:  5;  value:  CHAMPIONS LEAGUE\nROOM;  color:  white;  align:  center"></a-text>
                </a-entity>
